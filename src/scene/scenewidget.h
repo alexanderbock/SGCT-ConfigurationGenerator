@@ -1,7 +1,7 @@
-#include <QWidget>
+#include <QGroupBox>
 
-class SceneWidget : public QWidget {
+class SceneWidget : public QGroupBox {
 Q_OBJECT
 public:
-    SceneWidget(QWidget* parent = nullptr, Qt::WindowFlags flags = 0);
+    SceneWidget();
 };

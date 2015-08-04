@@ -1,7 +1,6 @@
 #include "scenewidget.h"
 
-
-SceneWidget::SceneWidget(QWidget* parent, Qt::WindowFlags flags)
-    : QWidget(parent, flags)
+SceneWidget::SceneWidget()
+    : QGroupBox("Scene")
 {
 }
