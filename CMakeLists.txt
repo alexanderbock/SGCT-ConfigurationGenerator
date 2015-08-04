@@ -21,7 +21,11 @@ set(SOURCE_FILES
     main.cpp
     src/sgctconfig.cpp
     src/capture/capturewidget.cpp
+    src/node/fisheyewidget.cpp
     src/node/nodewidget.cpp
+    src/node/planeprojectionwidget.cpp
+    src/node/viewplanewidget.cpp
+    src/node/windowwidget.cpp
     src/scene/scenewidget.cpp
     src/settings/osdtextwidget.cpp
     src/settings/settingswidget.cpp
@@ -37,7 +41,11 @@ set(SOURCE_FILES
 set(HEADER_FILES
     src/sgctconfig.h
     src/capture/capturewidget.h
+    src/node/fisheyewidget.h
     src/node/nodewidget.h
+    src/node/planeprojectionwidget.h
+    src/node/viewplanewidget.h
+    src/node/windowwidget.h
     src/scene/scenewidget.h
     src/settings/osdtextwidget.h
     src/settings/settingswidget.h

@@ -13,13 +13,22 @@
 #include <QList>
 #include <QPushButton>
 #include <QSlider>
+#include <QVBoxLayout>
 
 class SGCTConfigWidget : public QWidget {
 Q_OBJECT
 public:
     SGCTConfigWidget(QWidget* parent = nullptr, Qt::WindowFlags flags = 0);
 
+public slots:
+    void removeNode();
+
+private slots:
+    void addNode();
+
 private:
+    QVBoxLayout* _layout;
+
     QLabel _masterAddressLabel;
     QLineEdit _masterAddress;
     QCheckBox _debugMode;

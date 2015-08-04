@@ -1,8 +1,6 @@
 #include "sgctconfig.h"
 
-#include <QGridLayout>
 #include <QGroupBox>
-#include <QVBoxLayout>
 
 SGCTConfigWidget::SGCTConfigWidget(QWidget* parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
@@ -14,7 +12,12 @@ SGCTConfigWidget::SGCTConfigWidget(QWidget* parent, Qt::WindowFlags flags)
     , _firmSync("Firm Sync")
     , _newNodeButton("New Node")
 {
-    QBoxLayout* mainLayout = new QVBoxLayout;
+    QObject::connect(
+        &_newNodeButton, SIGNAL(pressed()),
+        this, SLOT(addNode())
+    );
+
+    _layout = new QVBoxLayout;
 
     {
         QGroupBox* box = new QGroupBox;
@@ -31,17 +34,38 @@ SGCTConfigWidget::SGCTConfigWidget(QWidget* parent, Qt::WindowFlags flags)
         layout->addWidget(&_firmSync, 0, 6);
 
         box->setLayout(layout);
-        mainLayout->addWidget(box);
+        _layout->addWidget(box);
     }
 
 
-    mainLayout->addWidget(&_settingsWidget);
-    mainLayout->addWidget(&_sceneWidget);
-    mainLayout->addWidget(&_captureWidget);
-    mainLayout->addWidget(&_userWidget);
-    mainLayout->addWidget(&_trackerWidget);
+    _layout->addWidget(&_settingsWidget);
+    _layout->addWidget(&_sceneWidget);
+    _layout->addWidget(&_captureWidget);
+    _layout->addWidget(&_userWidget);
+    _layout->addWidget(&_trackerWidget);
 
-    mainLayout->addWidget(&_newNodeButton);
+    _layout->addWidget(&_newNodeButton);
     
-    setLayout(mainLayout);
+    setLayout(_layout);
+}
+
+void SGCTConfigWidget::addNode() {
+    NodeWidget* w = new NodeWidget;
+    QObject::connect(
+        w, SIGNAL(removeNode()),
+        this, SLOT(removeNode())
+    );
+
+    _layout->addWidget(w);
+    _nodeWidgets.append(w);
+}
+
+void SGCTConfigWidget::removeNode() {
+    QObject* o = sender();
+    NodeWidget* w = dynamic_cast<NodeWidget*>(o);
+
+    _layout->removeWidget(w);
+    _nodeWidgets.removeOne(w);
+
+    w->deleteLater();
 }
