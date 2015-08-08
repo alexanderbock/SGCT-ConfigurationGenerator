@@ -69,6 +69,10 @@ add_executable(
     ${MOC_FILES}
 )
 
+set_property(TARGET SGCTConfig PROPERTY CXX_STANDARD 11)
+set_property(TARGET SGCTConfig PROPERTY CXX_STANDARD_REQUIRED On)
+
+
 target_include_directories(SGCTConfig PUBLIC src)
 
 
