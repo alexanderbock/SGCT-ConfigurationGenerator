@@ -18,6 +18,7 @@ public slots:
 
 private slots:
     void addDevice();
+    void checked(bool on);
 
 private:
     QGridLayout* _layout;

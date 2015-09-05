@@ -10,9 +10,15 @@ TrackerWidget::TrackerWidget()
     , _scaleLabel("Scale")
     , _newDeviceButton("New Device")
 {
+    setCheckable(true);
+
     QObject::connect(
         &_newDeviceButton, SIGNAL(pressed()),
         this, SLOT(addDevice())
+    );
+    QObject::connect(
+        this, SIGNAL(toggled(bool)),
+        this, SLOT(checked(bool))
     );
 
     _layout = new QGridLayout;
@@ -65,4 +71,10 @@ void TrackerWidget::removeDevice() {
     _deviceWidgets.removeOne(w);
 
     w->deleteLater();
+}
+
+void TrackerWidget::checked(bool on) {
+    for (int i = 0; i < _layout->count(); ++i)
+        dynamic_cast<QWidgetItem*>(_layout->itemAt(i))->widget()->setVisible(on);
+    setFlat(!on);
 }

@@ -1,5 +1,6 @@
 #include <QGroupBox>
 
+#include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
 
@@ -10,7 +11,12 @@ public:
 
     QString text() const;
 
+private slots:
+    void checked(bool on);
+
 private:
+    QGridLayout _layout;
+    
     QLabel _offsetLabel;
     QLineEdit _xOffset;
     QLineEdit _yOffset;

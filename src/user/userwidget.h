@@ -16,6 +16,7 @@ public slots:
 
 private slots:
     void addUser();
+    void checked(bool on);
 
 private:
     QVBoxLayout* _layout;

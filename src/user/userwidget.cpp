@@ -4,6 +4,12 @@ UserWidget::UserWidget()
     : QGroupBox("Users")
     , _newUserButton("New User")
 {
+    setCheckable(true);
+    QObject::connect(
+        this, SIGNAL(toggled(bool)),
+        this, SLOT(checked(bool))
+    );
+
     QObject::connect(
         &_newUserButton, SIGNAL(pressed()),
         this, SLOT(addUser())
@@ -33,4 +39,10 @@ void UserWidget::removeUser() {
     _userWidgets.removeOne(w);
 
     w->deleteLater();
+}
+
+void UserWidget::checked(bool on) {
+    for (int i = 0; i < _layout->count(); ++i)
+        dynamic_cast<QWidgetItem*>(_layout->itemAt(i))->widget()->setVisible(on);
+    setFlat(!on);
 }
